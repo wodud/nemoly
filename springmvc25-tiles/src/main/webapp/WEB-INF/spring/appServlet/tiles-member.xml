@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+타일즈 설정파일
+-->
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+       <!-- 컨트롤러에서 view name을 아래 definition name으로
+       			반환하면 TilesViewResolver에 의해 include된 여러페이지
+       			조합결과 화면이 나온다. -->
+<tiles-definitions>
+	<!-- <definition name="shop_register" extends="home">
+	<put-attribute name="main" value="register_view.jsp"/>
+	</definition> -->
+	<!-- 위와 같이 tiles를 정의하면 화면 수에 따라 설정이 급증한다.
+	이런 문제를 해결하기 위해
+	shop_* : 컨트롤러의 view name이 shop_로 시작되면
+	아래의 타일즈 설정으로 응답되도록 처리한다.
+	*에 해당하는 value 정보는 (1)로 표현한다.
+	 -->
+	<definition name="member_*" extends="home">
+	<put-attribute name="main" value="/WEB-INF/views/member/{1}.jsp"/>
+	</definition>
+	<!-- 관리자 모드 tiles 설정 
+			관리자 모드일경우 header 부분도 함께 변경되어야 함
+			definition name="admin_*_*"
+			value="/member/admin/{1}/{2}.jsp"
+			ex) shop관리자 로그인 화면의 view name은
+					admin_shopmgr_login
+	-->
+	<definition name="admin_*_*" extends="home">
+	<put-attribute name="header" value="/WEB-INF/views/templates/{1}/header.jsp"/>
+	<put-attribute name="main" value="/WEB-INF/views/member/admin/{1}/{2}.jsp"/>
+	</definition>
+</tiles-definitions>
+
+
+
+
+
+
+
